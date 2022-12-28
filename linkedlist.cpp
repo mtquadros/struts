@@ -19,13 +19,13 @@ slnode* sl_find(slnode * root, int value) {
 	slnode* found;
 	found = root;
 	while (!found) {
-		
+
 		if (found->num == value)
 			break;
 		else
 			found = found->next;
 	}
-#ifdef _DEBUG_ME_	
+#ifdef _DEBUG_ME_
 	assert(found == NULL || found->num == value);
 #endif
 	return found;
@@ -45,5 +45,24 @@ void sl_remove(slnode* root, slnode* node) {
 #endif
 }
 
+void sl_insert(slnode* root,int value){
+    slnode* prev = root;
+    slnode* tmp;
+
+    while (prev->next){
+        if (prev->next->num < value)
+            prev = prev->next;
+        else
+            break;
+    }
+    //prev->next == NULL || prev->next->num >= value
+#ifdef _DEBUG_ME_
+    assert(prev->next == NULL || prev->next->num >= value);
+#endif // _DEBUG_ME_
+    tmp = (slnode *) malloc(sizeof(slnode));
+    tmp->next = prev->next;
+    prev->next = tmp;
+
+}
 
 

@@ -1,13 +1,16 @@
-// 
-// 
+//
+//
 // Exercises of data structures for interview preparation
 //
 
 #include <stdio.h>
+#include "linkedlist.h"
 
 int main()
 {
-    printf("Hello!");
+    for(int count = 0; count < 8;count++){
+
+    }
 }
 
 

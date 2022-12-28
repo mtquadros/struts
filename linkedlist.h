@@ -18,4 +18,6 @@ slnode * sl_find(slnode* root, int value);
 
 void sl_remove(slnode* root, slnode* node);
 
+void sl_insert(slnode* root,int value);
+
 #endif
