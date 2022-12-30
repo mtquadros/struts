@@ -3,7 +3,7 @@
 
 // ---------------------------------------
 // Simple linked list node
-typedef struct {
+typedef struct slnode {
 	int num;
 	slnode *next;
 } slnode;
@@ -16,8 +16,10 @@ slnode * init_slist(int num);
 // returns the first node equals to value if it exists otherwise returns null;
 slnode * sl_find(slnode* root, int value);
 
-void sl_remove(slnode* root, slnode* node);
+void sl_remove(slnode** root, int value);
 
 void sl_insert(slnode* root,int value);
+
+void print_slist(slnode* root);
 
 #endif
