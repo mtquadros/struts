@@ -18,7 +18,7 @@ slnode* init_slist(int num) {
 // returns the first node equals to value if it exists otherwise returns null;
 slnode* sl_find(slnode * root, int value) {
 
-	while (root) {
+	while (root != NULL) {
 
 		if (root->num == value)
 			break;
@@ -32,8 +32,6 @@ slnode* sl_find(slnode * root, int value) {
 }
 
 void sl_remove(slnode** root, int value) {
-	slnode** indirect = root;
-	/* ------------------------------------ -
 	slnode* prev = NULL;
 	slnode* node = *root;
 	while (node->num != value) {
@@ -44,28 +42,22 @@ void sl_remove(slnode** root, int value) {
 	if (prev == NULL) {
 		*root = node->next;
 	}
-	 ------------------------------------- */
-
-	while ((*indirect)->num != value){
-		indirect = &(*indirect)->next;
-	}
 
 #ifdef _DEBUG_ME_
 	slnode* tmp = *indirect;
 #endif
-	*indirect = (*indirect)->next;
 
 #ifdef _DEBUG_ME_
 	assert(slfind(root, tmp->num));
 #endif
 }
 
-void sl_insert(slnode* root, int value){
-    slnode* prev = root;
-    slnode* tmp;
+void sl_insert(slnode** root, int value){
+    slnode* prev = NULL;
+    slnode* node = *root;
 
-    while (prev->next){
-        if (prev->next->num < value)
+    while (node){
+        if (node->num < value)
             prev = prev->next;
         else
             break;
@@ -84,10 +76,21 @@ void sl_insert(slnode* root, int value){
     prev->next = tmp;
 }
 
+void free_slist(slnode** root) {
+	slnode* next = NULL;
+
+	while(*root){
+		next = (*root)->next;
+		free(*root);
+		*root = next;
+	}
+}
+
 void print_slist(slnode* root)
 {
-	while (root) {
+	while (root != NULL) {
 		printf("%d, ", root->num);
+		root = root->next;
 	}
 }
 
