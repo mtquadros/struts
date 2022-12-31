@@ -57,23 +57,35 @@ void sl_insert(slnode** root, int value){
     slnode* node = *root;
 
     while (node){
-        if (node->num < value)
-            prev = prev->next;
-        else
+        if (node->num > value)
             break;
+        prev = node;
+        node = node->next;
     }
-    // prev->next == NULL || prev->next->num >= value
+    slnode *tmp = (slnode *) malloc(sizeof(slnode));
+    tmp->num = value;
+
+// prev == NULL  && node == ADDR
+// prev == ADDR  && node == ADDR
+// prev == ADDR  && node == NULL  && ((num > value) ||
+
+    if (prev == NULL){
+        //atualiza root
+        tmp->next = *root;
+        *root = tmp;
+    }
+    else{
+        //insere entre prev e node
+        tmp->next = prev->next;
+        prev->next = tmp;
+    }
+
+
 #ifdef _DEBUG_ME_
     assert(prev->next == NULL || prev->next->num >= value);
 	assert(root->num <= root->next->num);
 #endif // _DEBUG_ME_
 
-    tmp = (slnode *) malloc(sizeof(slnode));
-	
-	// always inserted after current node
-    tmp->next = prev->next;
-	tmp->num = value;
-    prev->next = tmp;
 }
 
 void free_slist(slnode** root) {
