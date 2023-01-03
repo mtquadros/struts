@@ -44,9 +44,6 @@ void sl_remove(slnode** root, int value) {
 		}
 		root = (*root)->next;
 	}
-#ifdef _DEBUG_ME_
-	slnode* tmp = *indirect;
-#endif
 
 #ifdef _DEBUG_ME_
 	assert(slfind(root, tmp->num));
