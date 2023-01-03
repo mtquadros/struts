@@ -32,17 +32,18 @@ slnode* sl_find(slnode * root, int value) {
 }
 
 void sl_remove(slnode** root, int value) {
-	slnode* prev = NULL;
-	slnode* node = *root;
-	while (node->num != value) {
-		prev = node;
-		node = node->next;
-	}
 
-	if (prev == NULL) {
-		*root = node->next;
-	}
+	slnode* tmp = NULL;
 
+	while (*root) {
+		if ((*root)->num == value){
+            tmp = *root;
+            *root = tmp->next;
+            free(tmp);
+            return;
+		}
+		root = (*root)->next;
+	}
 #ifdef _DEBUG_ME_
 	slnode* tmp = *indirect;
 #endif
