@@ -41,7 +41,7 @@ void sl_remove(slnode** root, int value) {
             free(tmp);
             return;
 		}
-		root = (*root)->next;
+		root = &(*root)->next;
 	}
 
 #ifdef _DEBUG_ME_
