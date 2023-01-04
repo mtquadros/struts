@@ -18,10 +18,9 @@ slnode* init_slist(int num) {
 // returns the first node equals to value if it exists otherwise returns null;
 slnode* sl_find(slnode * root, int value) {
 
-	while (root != NULL) {
-
+	while (root) {
 		if (root->num == value)
-			break;
+			return root;
 		else
 			root = root->next;
 	}
@@ -46,7 +45,7 @@ void sl_remove(slnode** root, int value) {
 	}
 
 #ifdef _DEBUG_ME_
-	assert(slfind(root, tmp->num));
+	assert(slfind(root, tmp->num) == NULL);
 #endif
 }
 
