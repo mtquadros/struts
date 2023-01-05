@@ -34,59 +34,46 @@ slnode* sl_find(slnode * root, int value) {
 void sl_remove(slnode** root, int value) {
 	slnode* prev = NULL;
 	slnode* node = *root;
-	while (node->num != value) {
-		prev = node;
-		node = node->next;
+
+	while (*root) {
+		if ((*root)->num == value)
+			break;
+
+		root = &(*root)->next;
 	}
+	
+
+
 
 	if (prev == NULL) {
 		*root = node->next;
 	}
-
-#ifdef _DEBUG_ME_
-	slnode* tmp = *indirect;
-#endif
-
+/*
 #ifdef _DEBUG_ME_
 	assert(slfind(root, tmp->num));
 #endif
+*/
 }
 
-void sl_insert(slnode** root, int value){
-    slnode* prev = NULL;
-    slnode* node = *root;
+void sl_insert(slnode** root, int value) {
+	
+	while (*root) {
+		if ((*root)->num > value)
+			break;
 
-    while (node){
-        if (node->num > value)
-            break;
-        prev = node;
-        node = node->next;
-    }
-    slnode *tmp = (slnode *) malloc(sizeof(slnode));
-    tmp->num = value;
-
-// prev == NULL  && node == ADDR
-// prev == ADDR  && node == ADDR
-// prev == ADDR  && node == NULL  && ((num > value) ||
-
-    if (prev == NULL){
-        //atualiza root
-        tmp->next = *root;
-        *root = tmp;
-    }
-    else{
-        //insere entre prev e node
-        tmp->next = prev->next;
-        prev->next = tmp;
-    }
-
+		root = &(*root)->next;
+	}
 
 #ifdef _DEBUG_ME_
-    assert(prev->next == NULL || prev->next->num >= value);
-	assert(root->num <= root->next->num);
+	assert(*root != NULL ? (*root)->num > value : *root == NULL);
 #endif // _DEBUG_ME_
 
+	slnode *tmp = (slnode *) malloc(sizeof(slnode));
+	tmp->num = value;
+	tmp->next = *root;
+	*root = tmp;
 }
+
 
 void free_slist(slnode** root) {
 	slnode* next = NULL;
@@ -96,11 +83,15 @@ void free_slist(slnode** root) {
 		free(*root);
 		*root = next;
 	}
+#ifdef _DEBUG_ME_
+	assert(*root == NULL);
+#endif // _DEBUG_ME_
+
 }
 
 void print_slist(slnode* root)
 {
-	while (root != NULL) {
+	while (root) {
 		printf("%d, ", root->num);
 		root = root->next;
 	}

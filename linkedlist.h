@@ -1,6 +1,8 @@
 #ifndef _LINKEDLIST_
 #define _LINKEDLIST_
 
+#define _DEBUG_ME_
+
 // ---------------------------------------
 // Simple linked list node
 typedef struct slnode {
@@ -18,8 +20,10 @@ slnode * sl_find(slnode* root, int value);
 
 void sl_remove(slnode** root, int value);
 
-void sl_insert(slnode* root,int value);
+void sl_insert(slnode** root,int value);
 
 void print_slist(slnode* root);
+
+void free_slist(slnode** root);
 
 #endif
