@@ -18,7 +18,9 @@ slnode * sl_find(slnode* root, int value);
 
 void sl_remove(slnode** root, int value);
 
-void sl_insert(slnode* root,int value);
+void sl_insert(slnode** root,int value);
+
+void free_slist(slnode* root);
 
 void print_slist(slnode* root);
 
