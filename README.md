@@ -1,4 +1,4 @@
-#  Data Structures exercises for Interview Preparation
+#  Data Structures exercises
 
 ## Project 1 - Linked List
 
